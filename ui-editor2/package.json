@@ -1,5 +1,5 @@
 {
-  "name": "ui-editor2",
+  "name": "@shared/ui-editor",
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",

@@ -1,4 +1,5 @@
-export {default as Toolbar} from './toolbar';
-export {default as ContentImage} from './content-image';
-export {default as Footer} from './footer';
-export {default as BubbleTable} from './bubble-table';
+export {default as EditorToolbar} from './editor-toolbar';
+export {default as EditorContentImage} from './editor-content-image';
+
+export {default as EditorBubbleLink} from './editor-bubble-link';
+export {default as EditorBubbleTable} from './editor-bubble-table';

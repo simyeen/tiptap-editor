@@ -1,60 +1,46 @@
-import {forwardRef, useRef, useState} from 'react';
+import {useEffect} from 'react';
 
-import {Editor, EditorProvider} from '@tiptap/react';
+import {TooltipProvider} from '../shared/shadcn';
+import Components from './components';
+import usePostEditor, {usePostEditorProps} from './hooks/use-article-editor';
 
-import {BubbleTable, Footer, Toolbar} from '../widgets';
-import {EDITOR_DEFAULT_CONTAINER_PROPS, EDITOR_DEFAULT_WRAPPER_STYLE} from './constant';
-import Extensions from './extensions';
-import './global.scss';
-import {EditorCumsumerComponent, useEditorChange} from './hook';
-import {useDragAndDrop, useEditorHandler} from './hook';
-import {EditorHandler, EditorProps} from './type';
-import {handleEndPosCursor} from './util';
+interface EditorProps extends usePostEditorProps {
+  isError?: boolean;
+  children?: React.ReactNode;
+}
 
-const Editor2 = forwardRef<EditorHandler, EditorProps>(
-  (
-    {
-      content = '',
-      editable = true,
-      placeholder = '',
-      footer = <Footer />,
-      editorWrapperStyle = EDITOR_DEFAULT_WRAPPER_STYLE,
-      editorContainerProps = EDITOR_DEFAULT_CONTAINER_PROPS,
-      onChange = () => {},
-    }: EditorProps,
-    ref
-  ) => {
-    const [editor, setEditor] = useState<Editor | null>(null);
-    const editorDivRef = useRef<HTMLDivElement | null>(null);
-    const extensions = Extensions({placeholder});
+export function PostEditor({
+  editable,
+  placeholder,
+  handleServerImageUpload,
+  content,
+  onContentChange,
+  onContentBlur,
+  thumb,
+  isError,
+  children,
+}: EditorProps) {
+  const editor = usePostEditor({
+    editable,
+    placeholder,
+    handleServerImageUpload,
+    content,
+    onContentChange,
+    onContentBlur,
+    thumb,
+  });
 
-    useEditorHandler({editor, ref});
-    useDragAndDrop({editor, editorDivRef});
-    useEditorChange({editor, onChange});
+  useEffect(() => {
+    if (thumb?.thumbnailUrl) editor?.commands.setBlogThumbnailUrl(thumb?.thumbnailUrl);
+  }, [thumb?.thumbnailUrl]);
 
-    return (
-      <div
-        ref={editorDivRef}
-        onClick={() => {
-          editor?.commands.focus();
-          handleEndPosCursor({editor});
-        }}
-        className={editable ? editorWrapperStyle : ''}
-      >
-        <EditorProvider
-          editable={editable}
-          extensions={extensions}
-          editorContainerProps={editable ? editorContainerProps : {}}
-          slotBefore={editable && <Toolbar />}
-          slotAfter={editable && footer}
-          content={content}
-        >
-          <EditorCumsumerComponent setEditor={setEditor} editable={editable} />
-          <BubbleTable />
-        </EditorProvider>
-      </div>
-    );
+  if (!editor) {
+    return null;
   }
-);
 
-export default Editor2;
+  return (
+    <TooltipProvider delayDuration={0}>
+      <Components {...{editor, editable, isError, handleServerImageUpload}}>{children}</Components>
+    </TooltipProvider>
+  );
+}

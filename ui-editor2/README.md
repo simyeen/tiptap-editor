@@ -1,7 +1,3 @@
-# ui-editor
+# ui-editor2
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test ui-editor` to execute the unit tests via [Vitest](https://vitest.dev/).
+- FSD 구조로 리팩토링 한 에디터입니다.

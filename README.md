@@ -1,2 +1,2 @@
 # tiptap-editor
-tiptap 에디터 개선
+ui-editor에서 ui-editor2로 개선

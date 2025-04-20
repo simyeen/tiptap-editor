@@ -1,0 +1,19 @@
+{
+  "name": "ui-editor2",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui-editor2/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/ui-editor2",
+        "main": "libs/shared/ui-editor2/src/index.ts",
+        "tsConfig": "libs/shared/ui-editor2/tsconfig.lib.json",
+        "assets": ["libs/shared/ui-editor2/*.md"]
+      }
+    }
+  }
+}

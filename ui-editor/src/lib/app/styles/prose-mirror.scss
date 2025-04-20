@@ -1,0 +1,244 @@
+.article-editor {
+  .ProseMirror-focused hr.ProseMirror-selectednode {
+    @apply rounded-full outline outline-2 outline-offset-1 outline-muted-foreground;
+  }
+
+  .ProseMirror-focused p.is-editor-empty::before {
+    content: none !important;
+  }
+
+  button[data-selected='true'] {
+    background-color: rgba(0, 0, 0, 0.75); /* 대표 썸네일로 선택되었을 때 버튼 색상 */
+  }
+
+  button[data-selected='false'] {
+    background-color: white; /* 대표 썸네일로 선택되지 않았을 때 버튼 색상 */
+    color: #898989;
+  }
+
+  button[data-selected='true'] .check-icon {
+    stroke: #ec1818; /* 대표 썸네일로 선택되었을 때 아이콘 색상 */
+  }
+
+  button[data-selected='false'] .check-icon {
+    stroke: #dddddd; /* 대표 썸네일로 선택되지 않았을 때 아이콘 색상 */
+  }
+
+  .ProseMirror {
+    @apply flex max-w-full cursor-text flex-col;
+    @apply z-0 outline-0;
+    min-height: inherit;
+
+    .heading-node {
+      @apply relative font-semibold;
+    }
+
+    .heading-node:first-child {
+      @apply mt-0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mb-2.5;
+    }
+
+    h1 {
+      @apply text-2xl font-extrabold;
+    }
+
+    h2 {
+      @apply text-xl font-bold;
+    }
+
+    h3 {
+      @apply text-lg font-semibold;
+    }
+
+    h4 {
+      @apply text-base font-semibold;
+    }
+
+    h5 {
+      @apply text-sm font-normal;
+    }
+
+    h6 {
+      @apply text-xs font-normal;
+    }
+
+    a.link {
+      @apply cursor-pointer text-primary;
+    }
+
+    a.link:hover {
+      @apply underline;
+    }
+
+    > div.editor {
+      @apply block flex-1 whitespace-pre-wrap;
+    }
+
+    ol,
+    ul {
+      @apply pl-6;
+    }
+
+    blockquote,
+    dl,
+    ol,
+    p,
+    pre,
+    ul {
+      @apply m-0;
+    }
+
+    li {
+      @apply leading-7;
+    }
+
+    p {
+      @apply break-words;
+    }
+
+    p.text-node {
+      margin: 0;
+    }
+
+    li .text-node:has(+ .list-node),
+    li > .list-node,
+    li > .text-node,
+    li p {
+      @apply mb-0;
+    }
+
+    blockquote {
+      @apply relative pl-3.5;
+    }
+
+    blockquote::before,
+    blockquote.is-empty::before {
+      @apply absolute bottom-0 left-0 top-0 h-full w-1 rounded-sm bg-accent-foreground/15 content-[''];
+    }
+
+    hr {
+      @apply my-3 h-0.5 w-full border-none bg-[var(--mt-hr)];
+    }
+
+    s span {
+      @apply line-through;
+    }
+
+    .selection,
+    *::selection,
+    ::selection {
+      @apply bg-primary/25;
+    }
+
+    ol {
+      @apply list-decimal;
+
+      ol {
+        list-style: lower-alpha;
+
+        ol {
+          list-style: lower-roman;
+        }
+      }
+    }
+
+    ul {
+      list-style: disc;
+
+      ul {
+        list-style: circle;
+
+        ul {
+          list-style: square;
+        }
+      }
+    }
+
+    ul[data-type='taskList'] {
+      list-style: none;
+      margin-left: 0;
+      padding: 0;
+
+      li {
+        align-items: flex-start;
+        display: flex;
+
+        > label {
+          flex: 0 0 auto;
+          margin-right: 0.5rem;
+          user-select: none;
+        }
+
+        > div {
+          flex: 1 1 auto;
+        }
+      }
+
+      input[type='checkbox'] {
+        cursor: pointer;
+      }
+
+      ul[data-type='taskList'] {
+        margin: 0;
+      }
+    }
+
+    div[data-youtube-video][draggable='true'] {
+      @apply cursor-move border border-fg-900 p-4;
+    }
+
+    div[data-youtube-video] iframe {
+      @apply block min-w-48 border border-fg-900 outline-none outline-0;
+    }
+
+    // placeholder
+    > p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      color: #adb5bd;
+      pointer-events: none;
+      height: 0;
+    }
+
+    // p.is-editor-empty::before {
+    //   content: attr(data-placeholder);
+    //   float: inherit;
+    //   @apply pointer-events-none h-0 text-[var(--mt-secondary)];
+    // }
+
+    .selection::selection {
+      background: transparent;
+    }
+
+    .ProseMirror-gapcursor {
+      @apply pointer-events-none static;
+    }
+
+    .ProseMirror-gapcursor:after {
+      @apply static;
+    }
+
+    .ProseMirror-hideselection {
+      @apply caret-transparent;
+    }
+
+    .resize-cursor {
+      @apply cursor-col-resize;
+    }
+
+    .selection {
+      @apply inline-block;
+    }
+
+    .resize-cursor {
+      cursor: col-resize;
+    }
+  }
+}

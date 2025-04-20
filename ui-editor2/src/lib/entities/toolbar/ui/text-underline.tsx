@@ -1,0 +1,20 @@
+import {UnderlineIcon} from 'lucide-react';
+
+import {useCurrentEditor} from '@tiptap/react';
+
+import {ICON_SIZE, ICON_STROKE_WIDTH} from '../../../shared/constant';
+import {Button} from '../../../shared/ui';
+
+export default function TextUnderline() {
+  const {editor} = useCurrentEditor();
+
+  return (
+    <Button
+      onClick={() => editor?.chain().focus().toggleUnderline().run()}
+      disabled={!editor?.can().chain().focus().toggleUnderline().run()}
+      className={editor?.isActive('underline') ? 'is-active bg-black text-white' : ''}
+    >
+      <UnderlineIcon size={ICON_SIZE} strokeWidth={ICON_STROKE_WIDTH} />
+    </Button>
+  );
+}

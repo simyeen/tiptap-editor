@@ -1,11 +1,3 @@
-# ui-editor
+# ui-editor1
 
-This library was generated with [Nx](https://nx.dev).
-
-## Building
-
-Run `nx build ui-editor` to build the library.
-
-## Running unit tests
-
-Run `nx test ui-editor` to execute the unit tests via [Vitest](https://vitest.dev/).
+- 가장 처음 형태의 에디터입니다.
